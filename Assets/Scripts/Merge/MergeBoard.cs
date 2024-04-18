@@ -1,3 +1,4 @@
+using Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Merge
 
         private void Start()
         {
-            InvokeRepeating("FillSlot", 0f, 5f);
+            InvokeRepeating("FillSlot", 0f, UpgradeManager.Instance.GetCurrentTimer());
         }
 
         public void FillSlot()
@@ -27,22 +28,15 @@ namespace Merge
             {
                 if(slot.GetItemMerge() == null)
                 {
-                    CreateNewItemMerge(slot);
+                    CreateNewItemMerge(slot, UpgradeManager.Instance.GetCurrentTier());
                     break;
                 }
             }
         }
 
-        public ItemMerge CreateNewItemMerge(ItemSlot slot, bool newItem = false)
+        public ItemMerge CreateNewItemMerge(ItemSlot slot, Tier tier)
         {
-            GameObject instance;
-            if (newItem)
-            {
-                instance = Instantiate(nextItemSlotPrefab);
-            } else
-            {
-                instance = Instantiate(itemSlotPrefab);
-            }
+            GameObject instance = Instantiate(ItemManager.Instance.GetItemSlotPrefabByTier(tier));
             
             instance.transform.SetParent(itemsParent);
             instance.GetComponent<ItemMerge>().GetCanvas();
@@ -105,11 +99,12 @@ namespace Merge
             // Debug.Log("Merge: same objects");
             int nextTier = (int)previousItemMerge.GetItemSO().tier;
             nextTier += 1;
+            Tier tier = (Tier) nextTier;
 
             previousItemSlot.SetItemMerge(null);
             Destroy(previousItemMerge.gameObject);
             Destroy(nextItemMerge.gameObject);
-            ItemMerge newItemMerge = CreateNewItemMerge(nextItemSlot, true);
+            ItemMerge newItemMerge = CreateNewItemMerge(nextItemSlot, tier);
             nextItemSlot.SetItemMerge(newItemMerge);
         }
     }

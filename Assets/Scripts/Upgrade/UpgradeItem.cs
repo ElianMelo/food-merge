@@ -1,21 +1,32 @@
+using Core;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Upgrade
 {
     public class UpgradeItem : MonoBehaviour
-    {
-        // Start is called before the first frame update
-        void Start()
+    {   
+        [SerializeField]
+        private Image icon;
+        [SerializeField]
+        private TextMeshProUGUI title;
+        [SerializeField]
+        private TextMeshProUGUI description;
+        [SerializeField]
+        private TextMeshProUGUI cost;
+        [SerializeField]
+        private UpgradeSO upgradeSO;
+
+        public void LoadUpgradeSOData(UpgradeSO upgradeSO)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            this.upgradeSO = upgradeSO;
+            icon.sprite = upgradeSO.icon;
+            title.text = upgradeSO.title;
+            description.text = upgradeSO.description;
+            cost.text = "$" + upgradeSO.cost;
         }
     }
 }

@@ -23,6 +23,11 @@ namespace Merge
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
+        public Tier GetTier()
+        {
+            return itemSO.tier;
+        }
+
         public void GetCanvas()
         {
             canvas = GetComponentInParent<Canvas>();
