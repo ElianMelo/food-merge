@@ -1,21 +1,26 @@
+using Core;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Glossary
 {
     public class GlossaryItem : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField]
+        private Image icon;
+        [SerializeField]
+        private TextMeshProUGUI description;
+        [SerializeField]
+        private GlossarySO glossarySO;
+
+        public void LoadGlossarySOData(GlossarySO glossarySO)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            this.glossarySO = glossarySO;
+            icon.sprite = glossarySO.icon;
+            description.text = glossarySO.description;
         }
     }
 }
