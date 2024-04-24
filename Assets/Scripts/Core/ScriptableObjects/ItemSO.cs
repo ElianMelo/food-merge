@@ -25,6 +25,7 @@ namespace Core
         public Sprite image;
         public string title;
         public Tier tier;
+        public int moneyAmount;
     }
 }
 

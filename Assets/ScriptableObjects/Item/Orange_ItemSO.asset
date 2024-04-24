@@ -15,3 +15,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 5e14fa7c41afa0941881e718d7877e65, type: 3}
   title: Orange
   tier: 5
+  moneyAmount: 64

@@ -20,6 +20,13 @@ namespace Upgrade
         [SerializeField]
         private UpgradeSO upgradeSO;
 
+        private UpgradeBoard upgradeBoard;
+
+        public void SetUpgradeBoard(UpgradeBoard upgradeBoard)
+        {
+            this.upgradeBoard = upgradeBoard;
+        }
+
         public void LoadUpgradeSOData(UpgradeSO upgradeSO)
         {
             this.upgradeSO = upgradeSO;
@@ -27,6 +34,16 @@ namespace Upgrade
             title.text = upgradeSO.title;
             description.text = upgradeSO.description;
             cost.text = "$" + upgradeSO.cost;
+        }
+
+        public void BuyUpgrade()
+        {
+            if(MoneyManager.Instance.GetAmount() >= upgradeSO.cost)
+            {
+                MoneyManager.Instance.RemoveAmount(upgradeSO.cost);
+                UpgradeManager.Instance.BuyUpgrade(upgradeSO);
+                upgradeBoard.RemoveUpgrade(gameObject);
+            }
         }
     }
 }

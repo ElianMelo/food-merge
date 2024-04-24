@@ -34,5 +34,25 @@ namespace Core
             currentTier = (Tier)tierInt;
         }
 
+        public void UpgradeTimer()
+        {
+            currentTimer -= 2;
+        }
+
+        public void BuyUpgrade(UpgradeSO upgradeSO)
+        {
+            switch (upgradeSO.type)
+            {   
+                case UpgradeType.Time:
+                    UpgradeTimer();
+                    break;
+                case UpgradeType.Tier:
+                    UpgradeTier();
+                    break;
+                default:
+                    break;
+            }
+        }
+
     }
 }

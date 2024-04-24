@@ -15,3 +15,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 1cb7ef8c2d97da84dab7ba8a8831d8f0, type: 3}
   title: Banana
   tier: 1
+  moneyAmount: 4

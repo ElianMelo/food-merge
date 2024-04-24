@@ -15,3 +15,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: c07cf3eba76367649b2877118c265db1, type: 3}
   title: Kiwi
   tier: 3
+  moneyAmount: 16

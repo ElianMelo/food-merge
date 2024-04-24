@@ -1,9 +1,8 @@
 using Merge;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace Core
 {
@@ -26,14 +25,24 @@ namespace Core
 
         private void Start()
         {
-            
+            InvokeRepeating("CalculateItemMoneyAmount", 0, 1f);
         }
 
-        public void AddItemSO(ItemSO itemSO)
+        public void CalculateItemMoneyAmount()
+        {
+            int sumAmount = 0;
+            foreach (var item in itemSoToQty.Keys)
+            {
+                sumAmount += item.moneyAmount * itemSoToQty[item];
+            }
+            MoneyManager.Instance.AddAmount(sumAmount);
+        }
+
+        public void AddItemSO(ItemSO itemSO, int amount = 1)
         {
             if (itemSoToQty.ContainsKey(itemSO))
             {
-                itemSoToQty[itemSO] += 1;
+                itemSoToQty[itemSO] += amount;
             } else
             {
                 itemSoToQty[itemSO] = 1;
@@ -41,13 +50,30 @@ namespace Core
             // Debug.Log(itemSO.tier + " - " + itemSoToQty[itemSO]);
         }
 
-        public void RemoveItemSO(ItemSO itemSO)
+        public void RemoveItemSO(ItemSO itemSO, int amount = 1)
         {
             int qty = itemSoToQty[itemSO];
             if(qty > 0)
             {
-                itemSoToQty[itemSO] -= 1;
+                itemSoToQty[itemSO] -= amount;
             }
+        }
+
+        public List<ItemSO> GetItemsSO()
+        {
+            List<ItemSO> listItemSO = new List<ItemSO>();
+
+            foreach (var item in itemSoToQty.Keys)
+            {
+                listItemSO.Add(item);
+            }
+
+            return listItemSO;
+        }
+
+        public int GetAmountByItemSO(ItemSO key)
+        {
+            return itemSoToQty[key];
         }
 
         private void InitializeTierToItem()

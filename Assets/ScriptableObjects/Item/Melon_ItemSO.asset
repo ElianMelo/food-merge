@@ -15,3 +15,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 808c9c5bdc604ed468f5723ce315830a, type: 3}
   title: Melon
   tier: 4
+  moneyAmount: 32

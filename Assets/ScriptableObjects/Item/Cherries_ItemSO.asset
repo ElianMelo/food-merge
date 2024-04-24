@@ -15,3 +15,4 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 27558e5f5dd48834a967d4c223ad1db9, type: 3}
   title: Cherries
   tier: 2
+  moneyAmount: 8

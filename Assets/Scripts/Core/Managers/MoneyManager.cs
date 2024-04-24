@@ -11,7 +11,7 @@ namespace Core
         public delegate void MoneyChange();
         public static event MoneyChange OnMoneyChanged;
 
-        private int amount = 0;
+        private int amount = 500;
 
         private void Awake()
         {
