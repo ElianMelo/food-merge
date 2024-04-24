@@ -9,10 +9,8 @@ namespace Core
     {
         public static UpgradeManager Instance;
 
-        public EventHandler OnListChanged;
-
         private Tier currentTier = Tier.I;
-        private float currentTimer = 2f;
+        private float currentTimer = 5f;
 
         private void Awake()
         {

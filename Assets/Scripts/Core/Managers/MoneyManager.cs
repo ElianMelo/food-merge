@@ -19,7 +19,7 @@ namespace Core
         }
         private void Start()
         {
-            Invoke("Test", 2f);
+            // Invoke("Test", 2f);
         }
 
         public void Test()

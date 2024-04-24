@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 namespace Merge
 {
@@ -16,10 +17,26 @@ namespace Merge
         private GameObject nextItemSlotPrefab;
         [SerializeField]
         private Transform itemsParent;
+        private float currentTimer;
 
-        private void Start()
+        private void Start() {
+            ResetTimer();
+            FillSlot();
+        }
+
+        private void Update()
         {
-            InvokeRepeating("FillSlot", 0f, UpgradeManager.Instance.GetCurrentTimer());
+            currentTimer -= Time.deltaTime;
+            if (currentTimer < 0f)
+            {
+                FillSlot();
+                ResetTimer();
+            }
+        }
+
+        public void ResetTimer()
+        {
+            currentTimer = UpgradeManager.Instance.GetCurrentTimer();
         }
 
         public void FillSlot()
@@ -28,23 +45,25 @@ namespace Merge
             {
                 if(slot.GetItemMerge() == null)
                 {
-                    CreateNewItemMerge(slot, UpgradeManager.Instance.GetCurrentTier());
+                    CreateNewItemMerge(slot, UpgradeManager.Instance.GetCurrentTier());    
                     break;
                 }
             }
         }
 
-        public ItemMerge CreateNewItemMerge(ItemSlot slot, Tier tier)
+        public GameObject CreateNewItemMerge(ItemSlot slot, Tier tier)
         {
             GameObject instance = Instantiate(ItemManager.Instance.GetItemSlotPrefabByTier(tier));
             
             instance.transform.SetParent(itemsParent);
-            instance.GetComponent<ItemMerge>().GetCanvas();
-            instance.GetComponent<ItemMerge>().SetItemSlot(slot);
+            ItemMerge itemMerge = instance.GetComponent<ItemMerge>();
+            itemMerge.GetCanvas();
+            itemMerge.SetItemSlot(slot);
             instance.GetComponent<RectTransform>().anchoredPosition = slot.GetComponent<RectTransform>().anchoredPosition;
             instance.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-            slot.SetItemMerge(instance.GetComponent<ItemMerge>());
-            return instance.GetComponent<ItemMerge>();
+            slot.SetItemMerge(itemMerge);
+            ItemManager.Instance.AddItemSO(itemMerge.GetItemSO());
+            return instance;
         }
 
         public bool HandleMergeBoardOperation(ItemSlot previousItemSlot, ItemMerge previousItemMerge,
@@ -102,9 +121,15 @@ namespace Merge
             Tier tier = (Tier) nextTier;
 
             previousItemSlot.SetItemMerge(null);
+
+            ItemManager.Instance.RemoveItemSO(previousItemMerge.GetItemSO());
             Destroy(previousItemMerge.gameObject);
+
+            ItemManager.Instance.RemoveItemSO(nextItemMerge.GetItemSO());
             Destroy(nextItemMerge.gameObject);
-            ItemMerge newItemMerge = CreateNewItemMerge(nextItemSlot, tier);
+
+            ItemMerge newItemMerge = CreateNewItemMerge(nextItemSlot, tier).GetComponent<ItemMerge>();
+
             nextItemSlot.SetItemMerge(newItemMerge);
         }
     }
