@@ -1,4 +1,5 @@
 using Merge;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal.VersionControl;
@@ -16,6 +17,8 @@ namespace Core
         private Dictionary<Tier, GameObject> tierToItemPrefab = new Dictionary<Tier, GameObject>();
 
         private Dictionary<ItemSO, int> itemSoToQty = new Dictionary<ItemSO, int>();
+
+        private List<ItemSO> itemsToRemove = new List<ItemSO>();
 
         private void Awake()
         {
@@ -50,13 +53,35 @@ namespace Core
             // Debug.Log(itemSO.tier + " - " + itemSoToQty[itemSO]);
         }
 
-        public void RemoveItemSO(ItemSO itemSO, int amount = 1)
+        public void RemoveItemSO(ItemSO itemSO, bool shouldRemove = false, int amount = 1)
         {
             int qty = itemSoToQty[itemSO];
             if(qty > 0)
             {
                 itemSoToQty[itemSO] -= amount;
+                if (shouldRemove)
+                {
+                    for (var i = 0; i < amount; i++)
+                    {
+                        itemsToRemove.Add(itemSO);
+                    }
+                }
             }
+        }
+
+        public bool HasItemToRemove()
+        {
+            return itemsToRemove.Count > 0;
+        }
+
+        public List<ItemSO> GetItemsToRemove()
+        {
+            return itemsToRemove;
+        }
+
+        public void ClearItemsToRemove()
+        {
+            itemsToRemove.Clear();
         }
 
         public List<ItemSO> GetItemsSO()
@@ -73,6 +98,10 @@ namespace Core
 
         public int GetAmountByItemSO(ItemSO key)
         {
+            if(!itemSoToQty.ContainsKey(key))
+            {
+                return 0;
+            }
             return itemSoToQty[key];
         }
 

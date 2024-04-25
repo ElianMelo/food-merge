@@ -9,7 +9,9 @@ namespace Core
     {
         public static UpgradeManager Instance;
 
+        [SerializeField]
         private Tier currentTier = Tier.I;
+        [SerializeField]
         private float currentTimer = 5f;
 
         private void Awake()

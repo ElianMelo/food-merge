@@ -23,10 +23,16 @@ namespace Quest
         private QuestSO questSO;
 
         private ItemSO itemSO;
+        private QuestBoard questBoard;
 
         private void Start()
         {
             LoadQuestSOData(questSO);
+        }
+
+        public void SetQuestBoard(QuestBoard questBoard)
+        {
+            this.questBoard = questBoard;
         }
 
         public void LoadQuestSOData(QuestSO questSO)
@@ -37,7 +43,28 @@ namespace Quest
             item.sprite = itemSO.image;
             description.text = questSO.description;
             reward.text = "Reward: $" + questSO.reward;
-            amount.text = "0 / " + questSO.amount;
+            UpdateQuestAmount();
+        }
+
+        private void OnEnable()
+        {
+            UpdateQuestAmount();
+        }
+
+        public void UpdateQuestAmount()
+        {
+            if (!itemSO) return;
+            amount.text = ItemManager.Instance.GetAmountByItemSO(itemSO) + " / " + questSO.amount;
+        }
+
+        public void CompleteQuest()
+        {
+            if (ItemManager.Instance.GetAmountByItemSO(itemSO) >= questSO.amount)
+            {
+                ItemManager.Instance.RemoveItemSO(itemSO, true, questSO.amount);
+                MoneyManager.Instance.AddAmount(questSO.reward);
+                questBoard.RemoveQuest(gameObject);
+            }
         }
     }
 }

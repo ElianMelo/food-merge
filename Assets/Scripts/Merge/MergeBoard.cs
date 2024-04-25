@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
 namespace Merge
 {
@@ -22,6 +21,33 @@ namespace Merge
         private void Start() {
             ResetTimer();
             FillSlot();
+        }
+
+        void OnEnable()
+        {
+            if(ItemManager.Instance.HasItemToRemove())
+            {
+                foreach(ItemSO item in ItemManager.Instance.GetItemsToRemove())
+                {
+                    RemoveItemMerge(item);
+                }
+                ItemManager.Instance.ClearItemsToRemove();
+            }
+        }
+
+        public void RemoveItemMerge(ItemSO item)
+        {
+            foreach (var slot in slots)
+            {
+                if (slot.GetItemMerge() && slot.GetItemMerge().GetItemSO() == item)
+                {
+                    ItemMerge itemMerge = slot.GetItemMerge();
+                    slot.SetItemMerge(null);
+                    Destroy(itemMerge.gameObject);
+
+                    return;
+                }
+            }
         }
 
         private void Update()

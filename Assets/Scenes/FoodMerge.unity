@@ -274,9 +274,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa80e8331f2ce91489707fb2345f152f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradePrefab: {fileID: 941855228341182389, guid: 175d809193477a240bff94949af6b47c, type: 3}
+  questPrefab: {fileID: 941855228341182389, guid: 175d809193477a240bff94949af6b47c, type: 3}
   items:
   - {fileID: 11400000, guid: 2dde8b0a7f43f5f4ab872ae9b50ca82f, type: 2}
+  - {fileID: 11400000, guid: e39292b431cb5874587648193ea84915, type: 2}
 --- !u!1001 &77973222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3196,6 +3197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a1a89e5222818846938387262056e88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTier: 0
+  currentTimer: 1
 --- !u!1001 &976394979
 PrefabInstance:
   m_ObjectHideFlags: 0
