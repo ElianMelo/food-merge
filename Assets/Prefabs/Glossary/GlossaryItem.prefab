@@ -240,6 +240,7 @@ MonoBehaviour:
   icon: {fileID: 4808635191638422177}
   description: {fileID: 8056113758126490017}
   glossarySO: {fileID: 11400000, guid: a511ebc57985547439cdcf6875493043, type: 2}
+  defaultGlossarySO: {fileID: 11400000, guid: 6ca1443fd756ab04cbc444508f3ff9e6, type: 2}
 --- !u!1 &8179593556851454940
 GameObject:
   m_ObjectHideFlags: 0

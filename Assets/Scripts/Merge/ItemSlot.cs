@@ -24,15 +24,21 @@ namespace Merge
                 ItemMerge previousItemMerge = dropObject.GetComponent<ItemMerge>();
                 if (previousItemMerge == itemMerge)
                 {
+                    // Wrong Behavior
                     previousItemMerge.GetItemSlot().SetItemMerge(null);
                     return;
                 }
 
+                ItemMerge currentItemMerge = itemMerge;
+                GameObject oldItemSlot = previousItemMerge.GetItemSlot().gameObject;
                 bool shouldSwap = mergeBoard.HandleMergeBoardOperation(previousItemMerge.GetItemSlot(), previousItemMerge,
                     this, itemMerge);
 
                 if(shouldSwap)
                 {
+                    currentItemMerge.GetComponent<RectTransform>().anchoredPosition
+                        = oldItemSlot.GetComponent<RectTransform>().anchoredPosition;
+
                     dropObject.GetComponent<RectTransform>().anchoredPosition
                         = GetComponent<RectTransform>().anchoredPosition;
                 } else

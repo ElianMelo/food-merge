@@ -42,7 +42,7 @@ namespace Upgrade
             {
                 MoneyManager.Instance.RemoveAmount(upgradeSO.cost);
                 UpgradeManager.Instance.BuyUpgrade(upgradeSO);
-                upgradeBoard.RemoveUpgrade(gameObject);
+                upgradeBoard.RemoveUpgrade(gameObject, upgradeSO);
             }
         }
     }

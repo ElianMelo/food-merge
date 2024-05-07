@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a18bbe02cbba1c43ad89d9d0905657f, type: 3}
+  m_Name: Default_GlossarySO
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: be4fa3b3ce921054ebbc08a98ac2f2c8, type: 3}
+  description: Buy this food to unlock more info about it, you can discover awesome
+    new things

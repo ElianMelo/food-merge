@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questPrefab: {fileID: 941855228341182389, guid: 175d809193477a240bff94949af6b47c, type: 3}
+  completedQuestPrefab: {fileID: 941855228341182389, guid: c6b6318c8c492624fb0af097eb5d336d, type: 3}
   items:
   - {fileID: 11400000, guid: 2dde8b0a7f43f5f4ab872ae9b50ca82f, type: 2}
   - {fileID: 11400000, guid: e39292b431cb5874587648193ea84915, type: 2}
@@ -4884,6 +4885,8 @@ MonoBehaviour:
   glossaryPrefab: {fileID: 7496912044723678273, guid: 6a0fa95f4153f344d96ab40cf44ce43c, type: 3}
   items:
   - {fileID: 11400000, guid: a511ebc57985547439cdcf6875493043, type: 2}
+  - {fileID: 11400000, guid: a511ebc57985547439cdcf6875493043, type: 2}
+  - {fileID: 11400000, guid: a511ebc57985547439cdcf6875493043, type: 2}
 --- !u!1 &1999732554
 GameObject:
   m_ObjectHideFlags: 0
@@ -5501,6 +5504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradePrefab: {fileID: 7987359967763910073, guid: e95e772b7b48fbb4085e65d8a9f51b88, type: 3}
+  completedUpgradePrefab: {fileID: 7987359967763910073, guid: 3e826dd708d91734683e9ea083c56886, type: 3}
   items:
   - {fileID: 11400000, guid: 3d27694292735bf46a4163d75bd069a0, type: 2}
   - {fileID: 11400000, guid: f219b6c793dfac24e9090908bfbe46fd, type: 2}

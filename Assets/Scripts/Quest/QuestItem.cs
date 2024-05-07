@@ -63,7 +63,7 @@ namespace Quest
             {
                 ItemManager.Instance.RemoveItemSO(itemSO, true, questSO.amount);
                 MoneyManager.Instance.AddAmount(questSO.reward);
-                questBoard.RemoveQuest(gameObject);
+                questBoard.RemoveQuest(gameObject, questSO);
             }
         }
     }
