@@ -76,7 +76,6 @@ namespace Merge
                 ItemMerge previousItemMerge = dropObject.GetComponent<ItemMerge>();
                 if (previousItemMerge == itemSlot)
                 {
-                    // Wrong Behavior
                     previousItemMerge.GetItemSlot().SetItemMerge(null);
                     return;
                 }
