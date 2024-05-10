@@ -156,6 +156,8 @@ namespace Merge
 
             ItemMerge newItemMerge = CreateNewItemMerge(nextItemSlot, tier).GetComponent<ItemMerge>();
 
+            VFXManager.Instance.InstantiateMergeVFX(nextItemSlot.transform.position);
+
             nextItemSlot.SetItemMerge(newItemMerge);
         }
     }
